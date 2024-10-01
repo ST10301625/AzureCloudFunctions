@@ -3,7 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Azure.Storage.Blobs;      // Add the Azure Blob Storage namespace
 using Azure.Storage.Files.Shares; // Add the Azure File Storage namespace
-using Azure.Data.Tables;        // Add the Azure Table Storage namespace
+using Azure.Data.Tables;       // Add the Azure Table Storage namespace
+using Azure.Storage.Queues;    // Add the Azure Queue Storage namespace
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication() // Use ConfigureFunctionsWorkerDefaults to set up worker services
@@ -30,6 +31,9 @@ var host = new HostBuilder()
 
         // Register the TableServiceClient for Azure Table Storage
         services.AddSingleton(new TableServiceClient(storageConnectionString));
+
+        // Register the QueueServiceClient for Azure Queue Storage
+        services.AddSingleton(new QueueServiceClient(storageConnectionString));
     })
     .Build();
 
